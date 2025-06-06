@@ -307,16 +307,14 @@ class CalendarPuzzleSolver:
         
         # For simplicity, we'll generate dates for a specific year (2024)
         # and extract the weekday for each date
-        start_date = datetime(2024, 1, 1)
-        
         for month in range(1, 13):
             max_day = self.days_in_month[month]
             for day in range(1, max_day + 1):
                 try:
                     current_date = datetime(2024, month, day)
-                    weekday = current_date.weekday() + 1  # Convert to 1-7 (Monday=1)
-                    if weekday == 7:  # Sunday should be 7, not 0
-                        weekday = 7
+                    # Fix weekday calculation: Python's weekday() returns 0-6 (Mon-Sun)
+                    # We need 1-7 (Mon=1, Tue=2, ..., Sun=7)
+                    weekday = current_date.weekday() + 1  # Convert to 1-7
                     valid_dates.append((day, month, weekday))
                 except ValueError:
                     continue
