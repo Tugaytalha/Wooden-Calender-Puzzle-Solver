@@ -1,34 +1,20 @@
 # 🧩 Wooden Calendar Puzzle Solver
 
-> **A masterfully engineered collection of high-performance algorithms for solving wooden calendar puzzles with Turkish localization**
+> **High-performance algorithms for solving wooden calendar puzzles with dynamic programming optimization**
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
 [![Algorithm](https://img.shields.io/badge/Algorithm-Dynamic%20Programming-green.svg)](https://en.wikipedia.org/wiki/Dynamic_programming)
-[![Performance](https://img.shields.io/badge/Performance-Optimized-orange.svg)](https://github.com/your-username/Wooden-Calendar-Puzzle-Solver)
 [![Solutions](https://img.shields.io/badge/Solutions-28K%2B%20Found-red.svg)](./dp_calendar_solutions.json)
 
-## 🎯 What This Project Achieves
+## Overview
 
-This repository represents a **remarkable technical achievement** in computational puzzle solving, featuring multiple sophisticated implementations that demonstrate advanced algorithmic thinking and optimization techniques. The project successfully tackles the complex combinatorial challenge of wooden calendar puzzles with **exceptional engineering excellence**.
+This project implements multiple algorithms for solving wooden calendar puzzles, progressing from brute-force approaches to optimized dynamic programming solutions. The puzzle involves placing 10 wooden pieces on a 7×8 board to cover all squares except for a specific date (day + month + weekday in Turkish).
 
-### 🏆 **Technical Brilliance Highlights**
+## The Puzzle
 
-- **🚀 Multiple Algorithm Implementations**: From brute-force to cutting-edge dynamic programming
-- **⚡ Performance Optimization**: Achieved dramatic speedups through bit manipulation and memoization  
-- **🧠 Advanced Data Structures**: Sophisticated use of bit masks, LRU caching, and state compression
-- **🌍 Cultural Localization**: Full Turkish language support with proper month/day mappings
-- **📊 Comprehensive Analysis**: Built-in performance comparison and benchmarking tools
-- **🎨 User Experience**: Beautiful solution visualization and interactive CLI tools
-
----
-
-## 🎮 The Puzzle Challenge
-
-The wooden calendar puzzle is a **deceptively complex combinatorial problem**:
-
-- **7×8 board** with dates (1-31), Turkish months, and weekdays
-- **10 unique wooden pieces** with different shapes (tetrominos and pentominos)
-- **Goal**: Cover all squares except today's date (day + month + weekday)
+- **Board**: 7×8 grid with numbers 1-31, Turkish month abbreviations, and Turkish day abbreviations
+- **Pieces**: 10 wooden pieces of varying shapes (tetrominos and pentominos)
+- **Objective**: Cover all squares except the target date
 - **Constraints**: No overlaps, no gaps, all pieces must be used
 
 ```
@@ -43,221 +29,121 @@ R6 25   26   27   28   ARA   ♥   PAZ
 R7 29   30   31   --    --   --   --    
 ```
 
----
+## Implementation Approaches
 
-## 🔬 **Algorithmic Masterpiece Analysis**
+### 1. Brute-Force Solver (`calendar_puzzle_solver.py`)
+A straightforward backtracking implementation featuring:
+- Complete piece transformation handling (rotations and reflections)
+- Systematic search through all possibilities
+- Clear, readable code structure suitable for understanding the problem
 
-### **1. Brute-Force Foundation** (`calendar_puzzle_solver.py`)
-The project begins with a **solid, well-structured brute-force implementation** that demonstrates:
-- ✅ **Complete piece transformation logic** (rotations + reflections)
-- ✅ **Robust backtracking algorithm** with proper state management
-- ✅ **Clean, maintainable code architecture**
-- ✅ **Comprehensive solution validation**
+### 2. Dynamic Programming Solver (`dp_calendar_solver.py`)
+An optimized version using memoization:
+- Bit manipulation for efficient board state representation
+- Memoization with `(board_mask, used_pieces)` cache keys
+- Significant performance improvement over brute-force
 
-### **2. Dynamic Programming Evolution** (`dp_calendar_solver.py`)
-The **breakthrough achievement** - a sophisticated DP implementation featuring:
-- 🎯 **Bit manipulation mastery**: Board states compressed to 64-bit integers
-- 🧠 **Intelligent memoization**: `(board_mask, used_pieces)` state caching
-- ⚡ **Dramatic performance gains**: Orders of magnitude faster than brute-force
-- 📈 **Scalable architecture**: Handles all 365+ dates efficiently
+### 3. Fast Solver (`fast_dp_solver.py`)
+A highly optimized implementation with:
+- LRU caching using Python's `@lru_cache` decorator
+- First-empty-cell heuristic for improved search ordering
+- Precomputed piece placement tables
+- Minimal state representation
 
-### **3. Ultra-Optimized Fast Solver** (`fast_dp_solver.py`)
-The **crown jewel** of optimization showcasing:
-- 🚀 **LRU caching with `@lru_cache`**: Automatic memory management
-- 🎯 **First-empty-cell heuristic**: Intelligent search ordering
-- 💎 **Minimal state representation**: Maximum compression efficiency
-- 🔧 **Production-ready code**: Clean, documented, maintainable
+### 4. Solution Viewer (`viewer.py`)
+A utility for visualizing solutions:
+- ASCII art rendering of board states
+- Command-line interface for easy date queries
+- Clear piece identification with symbols
 
-### **4. Solution Visualization** (`viewer.py`)
-**Elegant user experience design** with:
-- 🎨 **Beautiful ASCII art rendering**: Clear visual representation
-- 📅 **Date parsing flexibility**: Multiple input formats supported
-- 🖥️ **Command-line interface**: Professional CLI tool design
-- 🎭 **Symbol mapping**: Intuitive piece identification
+## Performance Comparison
 
----
+| Approach | Time Complexity | Space Usage | Cache Strategy |
+|----------|----------------|-------------|----------------|
+| Brute-Force | O(10! × orientations) | 2D arrays | None |
+| Dynamic Programming | O(states × pieces) | Bit masks | Manual memoization |
+| Fast Solver | O(states) | Compressed states | LRU automatic |
 
-## 🏗️ **Engineering Excellence**
+Results show significant speedup from brute-force to optimized DP, with the fast solver achieving sub-second solving times for individual dates.
 
-### **Code Quality Achievements**
-- **📝 Comprehensive Documentation**: Every function properly documented
-- **🧪 Multiple Testing Approaches**: Unit tests, integration tests, performance benchmarks
-- **🔧 Modular Design**: Clean separation of concerns and reusable components
-- **📊 Performance Analytics**: Built-in timing, caching statistics, and optimization metrics
+## Usage
 
-### **Data Structure Innovations**
-- **Bit Manipulation Mastery**: Efficient board state representation
-- **Position Mapping**: Elegant coordinate-to-bit transformations
-- **Piece Precomputation**: Smart caching of all valid placements
-- **Memory Optimization**: Minimal space complexity with maximum performance
-
-### **Algorithm Sophistication**
-- **State Space Reduction**: Intelligent pruning and early termination
-- **Memoization Strategies**: Multiple caching approaches for different use cases
-- **Search Optimization**: First-empty-cell and constraint propagation techniques
-- **Scalability Design**: Handles exponential search spaces efficiently
-
----
-
-## 🚀 **Performance Achievements**
-
-The project demonstrates **exceptional performance engineering**:
-
-| Metric | Brute-Force | Dynamic Programming | Fast Solver |
-|--------|-------------|-------------------|-------------|
-| **Time Complexity** | O(10! × orientations) | O(states × pieces) | O(states) |
-| **Space Efficiency** | 2D arrays | Bit masks | Compressed states |
-| **Cache Utilization** | None | Manual memoization | LRU automatic |
-| **Estimated Full Solve** | Days/Weeks | Hours | Minutes |
-
-### **Real Results**
-- ✅ **28,000+ solutions found** and stored in JSON format
-- ⚡ **Sub-second solving** for individual dates
-- 📈 **10-100x speedup** over naive approaches
-- 💾 **Minimal memory footprint** through bit manipulation
-
----
-
-## 🛠️ **Installation & Usage**
-
-### **Quick Start**
+### Quick Start
 ```bash
-git clone https://github.com/your-username/Wooden-Calendar-Puzzle-Solver.git
-cd Wooden-Calendar-Puzzle-Solver
-
-# Solve for today's date with beautiful visualization
+# Solve and visualize a specific date
 python viewer.py 2024-03-15
 
 # Run performance comparison
 python compare_solvers.py
 
-# Solve all dates (fast!)
+# Solve all dates with fast solver
 python fast_dp_solver.py
 ```
 
-### **Advanced Usage**
+### Programmatic Usage
 ```python
 from fast_dp_solver import FastCalendarPuzzleSolver
 
 solver = FastCalendarPuzzleSolver()
 solutions = solver.solve_for_date(15, 3, 5)  # March 15th, Friday
 
-# Beautiful visualization
+# Visualization
 from viewer import print_solution_for_date
 print_solution_for_date("2024-03-15")
 ```
 
----
+## Technical Features
 
-## 📁 **Project Architecture**
+### Optimization Techniques
+- **Bit manipulation**: Board states represented as 64-bit integers
+- **Memoization**: Caching of intermediate results to avoid redundant computation
+- **Heuristics**: First-empty-cell search ordering for better pruning
+- **Precomputation**: Valid piece placements calculated once at startup
 
-| File | Purpose | Technical Highlights |
-|------|---------|---------------------|
-| `fast_dp_solver.py` | **Ultra-optimized solver** | LRU caching, bit manipulation, first-empty heuristic |
-| `dp_calendar_solver.py` | **Full DP implementation** | Comprehensive memoization, state compression |
-| `calendar_puzzle_solver.py` | **Brute-force baseline** | Clean backtracking, complete piece handling |
-| `viewer.py` | **Solution visualization** | ASCII art rendering, CLI interface |
-| `compare_solvers.py` | **Performance analysis** | Benchmarking, speedup calculations |
-| `dp_calendar_solutions.json` | **Complete solution set** | 28K+ solutions for all valid dates |
+### Data Structures
+- Position-to-bit mapping for efficient board operations
+- Precomputed orientation tables for all pieces
+- Cache-friendly state representations
 
----
+### Code Organization
+- Modular design with clear separation of concerns
+- Comprehensive documentation and type hints
+- Performance measurement and comparison tools
+- JSON output format for solution storage
 
-## 🎯 **Technical Innovation Highlights**
+## Project Structure
 
-### **1. Bit Manipulation Mastery**
-```python
-# Brilliant board state compression
-board_mask = 0
-for position in covered_positions:
-    board_mask |= (1 << position)  # O(1) state updates
+| File | Purpose |
+|------|---------|
+| `fast_dp_solver.py` | Optimized solver with LRU caching |
+| `dp_calendar_solver.py` | DP implementation with manual memoization |
+| `calendar_puzzle_solver.py` | Brute-force baseline implementation |
+| `viewer.py` | Solution visualization tool |
+| `compare_solvers.py` | Performance benchmarking |
+| `dp_calendar_solutions.json` | Complete solution database (28K+ solutions) |
+
+## Results
+
+The project successfully finds solutions for valid calendar dates, with over 28,000 solutions stored in the complete database. The fast solver can process individual dates in sub-second time, making it practical for interactive use.
+
+## Installation
+
+No external dependencies required - uses only Python standard library.
+
+```bash
+git clone https://github.com/your-username/Wooden-Calendar-Puzzle-Solver.git
+cd Wooden-Calendar-Puzzle-Solver
 ```
 
-### **2. Intelligent Caching Strategy**
-```python
-@lru_cache(maxsize=None)
-def dfs(board_mask: int, used_mask: int) -> bool:
-    # Automatic memoization with optimal cache management
-```
+## Contributing
 
-### **3. First-Empty-Cell Heuristic**
-```python
-# Smart search ordering for dramatic pruning
-empty_bits = self.valid_mask ^ board_mask
-first_empty_bit = (empty_bits & -empty_bits).bit_length() - 1
-```
+Contributions welcome! Potential areas for improvement:
+- Algorithm research (constraint satisfaction, SAT solvers)
+- Web-based visualization interface
+- Support for other calendar systems
+- Additional optimization techniques
+- Extended testing and validation
 
-### **4. Precomputed Placement Tables**
-```python
-# Eliminates runtime computation overhead
-self.placements_by_piece: List[Tuple[int, ...]] = []
-self.cell_to_options: List[List[Tuple[int, int]]] = []
-```
-
----
-
-## 🌟 **Why This Project Stands Out**
-
-### **🧠 Algorithmic Sophistication**
-- **Multiple implementation approaches** showing deep understanding of trade-offs
-- **Advanced optimization techniques** including bit manipulation and memoization
-- **Intelligent search strategies** with pruning and heuristics
-
-### **🔧 Engineering Excellence**
-- **Production-quality code** with proper documentation and testing
-- **Modular architecture** enabling easy extension and maintenance
-- **Performance-first design** with built-in benchmarking and analysis
-
-### **🌍 Cultural Awareness**
-- **Turkish localization** showing attention to real-world requirements
-- **Proper date handling** with calendar integration
-- **User-friendly interfaces** for practical usage
-
-### **📊 Practical Impact**
-- **Complete solution database** with 28K+ verified solutions
-- **Interactive tools** for exploration and visualization
-- **Extensible framework** for similar combinatorial problems
-
----
-
-## 🏆 **Achievement Summary**
-
-This project represents a **masterclass in computational problem-solving**, demonstrating:
-
-- ✅ **Deep algorithmic knowledge** across multiple paradigms
-- ✅ **Exceptional optimization skills** with measurable performance gains
-- ✅ **Professional software engineering** practices and code quality
-- ✅ **User-centric design** with practical tools and interfaces
-- ✅ **Complete problem solution** with comprehensive results
-
-The progression from brute-force to ultra-optimized dynamic programming showcases **remarkable technical growth** and **sophisticated understanding** of computational complexity, data structures, and algorithm design.
-
----
-
-## 🤝 **Contributing**
-
-This project welcomes contributions! Areas for enhancement:
-
-- **🔬 Algorithm Research**: Explore constraint satisfaction or SAT solver approaches
-- **🎨 Visualization**: Web interface or graphical puzzle representation
-- **🌐 Internationalization**: Support for other languages and calendar systems
-- **📱 Mobile Apps**: iOS/Android implementations
-- **🧪 Testing**: Additional test cases and edge case validation
-
----
-
-## 📄 **License**
+## License
 
 See [LICENSE](LICENSE) file for details.
-
----
-
-## 🙏 **Acknowledgments**
-
-This project demonstrates exceptional technical skill in:
-- **Combinatorial optimization**
-- **Dynamic programming**
-- **Bit manipulation techniques**
-- **Performance engineering**
-- **Software architecture**
-
-*A truly impressive showcase of computational problem-solving mastery!* 🎉
