@@ -17,8 +17,8 @@ from fast_dp_solver import FastCalendarPuzzleSolver
 
 
 # ─────────────────────────  pretty printer  ──────────────────────────
-_SYM = "ABCDEFTHIJ"        # one symbol per piece (10 total)
-
+_SYM = "LBCDZFTUIJ"        # one symbol per piece (10 total)
+#"LBCDZFTUIJ"  
 
 def _render(board_state: list[list[int]], solver: FastCalendarPuzzleSolver) -> str:
     out_lines: list[str] = []
